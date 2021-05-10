@@ -1,4 +1,4 @@
-# csharp-lessons
+# C# Language Lessons
 
 Purpose : Improve C# langauge skills to pro.
 
