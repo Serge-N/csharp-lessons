@@ -1,0 +1,59 @@
+﻿using FacadePattern.RobotParts;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace FacadePattern
+{
+    public class RobotFacade
+    {
+        RobotColor rc;
+        RobotHands rh;
+        RobotBody rb;
+        public RobotFacade()
+        {
+            rc = new RobotColor();
+            rh = new RobotHands();
+            rb = new RobotBody();
+        }
+        public void ConstructMilanoRobot()
+        {
+            Console.WriteLine("Creation of a Milano Robot Start");
+            rc.setDefaultColor();
+            rh.SetMilanoHands();
+            rb.createHands();
+            rb.CreateRemaingParts();
+            Console.WriteLine("Milano Robot Creation End");
+            Console.WriteLine();
+        }
+        public void ConstructRobonautRobot()
+        {
+            Console.WriteLine("Initiating the creational process of a Robonaut Robot");
+            rc.setDefaultColor();
+            rh.SetRobonautHands();
+
+            rb.createHands();
+            rb.CreateRemaingParts();
+Console.WriteLine("A Robonaut Robot is created");
+Console.WriteLine();
+}
+    public void DestroyMilanoRobot()
+    {
+        Console.WriteLine("Milano Robot's destruction process is started");
+        rh.ResetMilanoHands();
+        rb.DestroyHands();
+        rb.DestroyRemainingParts();
+        Console.WriteLine("Milano Robot's destruction process is over");
+        Console.WriteLine();
+    }
+    public void DestroyRobonautRobot()
+    {
+        Console.WriteLine("Initiating a Robonaut Robot's destruction process.");
+        rh.ResetRobonautHands();
+        rb.DestroyHands();
+        rb.DestroyRemainingParts();
+        Console.WriteLine("A Robonaut Robot is destroyed");
+        Console.WriteLine();
+    }
+}
+}
