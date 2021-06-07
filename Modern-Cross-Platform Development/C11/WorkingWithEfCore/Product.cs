@@ -15,6 +15,6 @@ namespace Packt.Shared
         public short? Stock {get; set;}
         public bool Discontinued {get; set;}
         public int CategoryID {get; set;}
-        public virtual Catergory Catergory {get; set;}
+        public virtual Category Catergory {get; set;}
     }
 }

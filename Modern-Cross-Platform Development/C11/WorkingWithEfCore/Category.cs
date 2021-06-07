@@ -3,16 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Packt.Shared
 {
-    public class Catergory
+    public class Category
     {
-        public int CatergoryID { get; set; }
-        public string CatergoryName { get; set; }
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
         [Column(TypeName="ntext")]
         public string Description { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
 
-        public Catergory(){
+        public Category(){
             this.Products = new HashSet<Product>();
         }
 
