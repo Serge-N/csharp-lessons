@@ -15,7 +15,6 @@ namespace Packt.Shared
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-             
              modelBuilder.Entity<Product>()
              .Property(product => product.UnitPrice)
              .HasConversion<double>();
