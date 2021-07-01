@@ -12,7 +12,8 @@ namespace WorkingWithTasks
             var timer = Stopwatch.StartNew();
 
             // SingleThread();
-            MultiThread();
+            // MultiThread();
+            PassingData();
 
             WriteLine($"{timer.ElapsedMilliseconds:#,##0}ms elapsed.");
         }
@@ -25,6 +26,16 @@ namespace WorkingWithTasks
             MethodC();
         }
 
+        static void PassingData()
+        {
+            WriteLine("Passing the result of one task as an input into another.");
+            var taskCallWebServiceAndThenStoredProcedure = Task.Factory
+            .StartNew(CallWebService)
+            .ContinueWith(previousTask => CallStoredProcedure(previousTask.Result));
+
+            WriteLine($"Result: {taskCallWebServiceAndThenStoredProcedure.Result}");
+        }
+
         static void MultiThread()
         {
             WriteLine("Running methods asynchronously on multiple threads.");
@@ -34,6 +45,9 @@ namespace WorkingWithTasks
             Task taskB = Task.Factory.StartNew(MethodB);
 
             Task taskC = Task.Run(new Action(MethodC));
+
+            Task[] tasks = { taskA, taskB, taskB };
+            Task.WaitAll(tasks);
         }
 
         static void MethodA()
@@ -55,6 +69,22 @@ namespace WorkingWithTasks
             WriteLine("Starting Method C...");
             Thread.Sleep(1000); // simulate one second of work
             WriteLine("Finished Method C.");
+        }
+
+        static decimal CallWebService()
+        {
+            WriteLine("Starting call to web service...");
+            Thread.Sleep((new Random()).Next(2000, 4000));
+            WriteLine("Finished call to web service.");
+            return 89.99M;
+        }
+
+        static string CallStoredProcedure(decimal amount)
+        {
+            WriteLine("Starting call to stored procedure...");
+            Thread.Sleep((new Random()).Next(2000, 4000));
+            WriteLine("Finished call to stored procedure.");
+            return $"12 products cost more than {amount:C}.";
         }
     }
 }

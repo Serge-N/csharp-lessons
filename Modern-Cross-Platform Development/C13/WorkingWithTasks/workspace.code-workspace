@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "..\\MonitoringApp"
+		},
+		{
+			"path": "..\\MonitoringLIb"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\NestedAndChildTasks"
+		}
+	],
+	"settings": {}
+}
