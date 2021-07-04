@@ -20,6 +20,9 @@
 		},
 		{
 			"path": "..\\AsyncConsole"
+		},
+		{
+			"path": "..\\AsyncEnumerable"
 		}
 	],
 	"settings": {}
