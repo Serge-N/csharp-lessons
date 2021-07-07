@@ -20,6 +20,7 @@ namespace Packt.Shared
         public long CategoryID { get; set; }
         [Required]
         [Column(TypeName = "nvarchar (15)")]
+        [StringLength(15)]
         public string CategoryName { get; set; }
         [Column(TypeName = "ntext")]
         public string Description { get; set; }

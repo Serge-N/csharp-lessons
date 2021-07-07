@@ -13,7 +13,7 @@ namespace Packt.Shared
     {
         [Required]
         [Column("TerritoryID", TypeName = "nvarchar")]
-        public string TerritoryId { get; set; }
+        public string TerritoryID { get; set; }
         [Required]
         [Column(TypeName = "nchar")]
         public string TerritoryDescription { get; set; }

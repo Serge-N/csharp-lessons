@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "PracticalApps\\NorthwindEntitiesLib"
+		},
+		{
+			"path": "PracticalApps\\NorthwindContextLib"
 		}
 	],
 	"settings": {}
