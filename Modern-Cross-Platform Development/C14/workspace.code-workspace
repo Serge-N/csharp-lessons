@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "PracticalApps\\NorthwindWeb"
+		},
+		{
+			"path": "PracticalApps\\NorthwindEmployees"
 		}
 	],
 	"settings": {}
