@@ -17,6 +17,9 @@
 		},
 		{
 			"path": "PracticalApps\\NorthwindMvc"
+		},
+		{
+			"path": "PracticalApps\\NorthwindCMS"
 		}
 	],
 	"settings": {}
