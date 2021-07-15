@@ -67,6 +67,10 @@ namespace NorthwindCMS
                 options.LoginUrl = "login";
                  */
             });
+
+            string databasePath = Path.Combine("..", "Northwind.db");
+            services.AddDbContext<Packt.Shared.Northwind>(options =>
+            options.UseSqlite($"Data Source={databasePath}"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,7 +94,8 @@ namespace NorthwindCMS
             EditorConfig.FromFile("editorconfig.json");
 
             // Middleware setup
-            app.UsePiranha(options => {
+            app.UsePiranha(options =>
+            {
                 options.UseManager();
                 options.UseTinyMCE();
                 options.UseIdentity();
