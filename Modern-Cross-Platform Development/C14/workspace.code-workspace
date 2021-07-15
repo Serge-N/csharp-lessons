@@ -20,6 +20,9 @@
 		},
 		{
 			"path": "PracticalApps\\NorthwindCMS"
+		},
+		{
+			"path": "PracticalApps\\NorthwindService"
 		}
 	],
 	"settings": {}
