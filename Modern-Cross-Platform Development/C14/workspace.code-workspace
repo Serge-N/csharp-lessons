@@ -23,6 +23,12 @@
 		},
 		{
 			"path": "PracticalApps\\NorthwindService"
+		},
+		{
+			"path": "PracticalApps\\NorthwindBlazorServer"
+		},
+		{
+			"path": "PracticalApps\\NorthwindBlazorWasm"
 		}
 	],
 	"settings": {}
