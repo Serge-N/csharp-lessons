@@ -63,5 +63,10 @@ namespace BankAccountNS
             ba.Debit(11.22);
             Console.WriteLine("Current balance is ${0}", ba.Balance);
         }
+
+        private double DebitAmountWithDrawl(double amount)
+        {
+            return m_balance + amount;
+        }
     }
 }

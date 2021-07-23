@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using BankAccountNS;
+using System.Reflection;
 
 namespace BankTests
 {
@@ -69,6 +70,23 @@ namespace BankTests
         bool IsOdd(int value)
         {
             return value % 2 == 1;
+        }
+
+        [Fact]
+        public void TestPrivateMethod()
+        {
+            // arrange
+            BankAccount objUnderTest = new("Kalusha Banda",24);
+            MethodInfo methodInfo = typeof(BankAccount).GetMethod("DebitAmountWithDrawl", BindingFlags.NonPublic | BindingFlags.Instance);
+            object[] parameters = { 6 };
+            double total = 30;
+
+            //Act
+            var withdrawl = methodInfo.Invoke(objUnderTest, parameters);
+
+            // Assert
+            Assert.Equal(total, withdrawl);
+
         }
 
     }
