@@ -1,10 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -28,7 +24,7 @@ namespace WebBasicTesting.Basics
 
             var element = driver.FindElement(By.CssSelector("css-1wa3eu0-placeholder"));
 
-            output.WriteLine(element.TagName);
+            output.WriteLine(element.TagName); // The css seletors where not found.
 
             driver.Close();
         }
