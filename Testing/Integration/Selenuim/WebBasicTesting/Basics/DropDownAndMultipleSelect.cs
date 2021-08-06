@@ -13,6 +13,7 @@ namespace WebBasicTesting.Basics
         {
             this.output = output;
         }
+
         [Fact]
         public void DropDownTest()
         {
