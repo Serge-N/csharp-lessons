@@ -17,9 +17,10 @@ namespace WebBasicTesting.Basics
         [Fact]
         public void AlertTest()
         {
-            IWebDriver driver = new ChromeDriver();
-
-            driver.Url = "https://demoqa.com/alerts";
+            IWebDriver driver = new ChromeDriver
+            {
+                Url = "https://demoqa.com/alerts"
+            };
 
             // click alert
             driver.FindElement(By.Id("alertButton")).Click();
