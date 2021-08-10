@@ -4,7 +4,7 @@ Purpose : Improve C# langauge skills to pro.
 
 Primary Target : ASP
 
-Secondary Target : MAUI
+Secondary Target : Maui former Xamarin Forms
 
 Time Allocation : 1 hour per day
 
