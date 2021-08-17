@@ -18,7 +18,8 @@ namespace WebBasicTesting.Basics
             {
                 Url = "https://demoqa.com/alerts"
             };
-
+            
+             // this function was called ImplicitlyWait. Watch out for it old code.
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(500);
 
             IWebElement element = driver.FindElement(By.Id("target"));
