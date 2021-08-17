@@ -23,6 +23,5 @@ namespace WebBasicTesting.Basics
 
             IWebElement element = driver.FindElement(By.Id("target"));
         }
-
     }
 }
