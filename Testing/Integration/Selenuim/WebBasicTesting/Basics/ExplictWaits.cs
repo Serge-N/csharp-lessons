@@ -43,7 +43,6 @@ namespace WebBasicTesting.Basics
             wait.Until(waitForElement);
         }
 
-
         [Fact]
         public void TestDefaulttWait()
         {
