@@ -4,7 +4,7 @@ using System.Linq;
 using Dapper;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.OleDb;
+using ClosedXML.Excel;
 
 namespace WebBasicTesting.Basics.TestDataAccess
 {
@@ -17,14 +17,26 @@ namespace WebBasicTesting.Basics.TestDataAccess
             return con;
         }
 
-        public static UserData GetTestData(string keyName)
+        public void Create(string filePath)
         {
-            using var connection = new OleDbConnection(TestDataFileConnection());
-            connection.Open();
-            var query = string.Format("select * from [DataSet$] where key='{0}'", keyName);
-            var value = connection.Query<UserData>(query).FirstOrDefault();
-            connection.Close();
-            return value;
+            IXLWorkbook workbook = new XLWorkbook();
+            IXLWorksheet worksheet = workbook.AddWorksheet("Test Sheet");
+            worksheet.Cell(1, 1).Value = "Hello World!";
+            workbook.SaveAs(filePath);
+        }
+
+        public UserData CreateUser()
+        {
+            var file = "TestData.xlsx";
+            IXLWorkbook workbook = new XLWorkbook(file);
+            IXLWorksheet worksheet = workbook.AddWorksheet("Dataset");
+
+            return new UserData
+            {
+                Key = worksheet.Cell("A2").Value.ToString(),
+                UserName = worksheet.Cell("B2").Value.ToString(),
+                Password = worksheet.Cell("C2").Value.ToString(),
+            };
         }
     }
 }
