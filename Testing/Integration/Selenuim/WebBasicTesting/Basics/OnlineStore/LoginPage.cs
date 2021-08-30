@@ -1,20 +1,46 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Chrome;
+using System.Threading;
+using WebBasicTesting.Basics.TestDataAccess;
+using Xunit;
 
 namespace WebBasicTesting.Basics.OnlineStore
 {
     public class LoginPage
     {
-        private IWebDriver driver;
+        [Fact]
+        public void Login()
+        {
+            IWebDriver driver = new ChromeDriver
+            {
+                Url = "https://www.demoqa.com/login"
+            };
 
-        [FindsBy(How = How.Id, Using = "log")]
-        public IWebElement UserName { get; set; }
+            // arrange
+            driver.Manage().Window.Maximize();
 
-        [FindsBy(How = How.Id, Using = "pwd")]
-        public IWebElement Password { get; set; }
+            var dataAccess = new ExcelDataAccess();
+            var user = dataAccess.CreateUser();
 
-        [FindsBy(How = How.Id, Using = "login")]
-        public IWebElement Submit { get; set; }
+            // act
+            var name = driver.FindElement(By.Id("userName"));
+            name.SendKeys(user.UserName);
+
+            var password = driver.FindElement(By.Id("password"));
+            password.SendKeys(user.Password);
+
+            driver.FindElement(By.Id("login")).Click();
+
+            var expectedPage = "https://www.demoqa.com/profile";
+            Thread.Sleep(2000);
+            var currentPage = driver.Url;
+
+            // assert
+            Assert.Equal(expectedPage, currentPage);
+
+            Thread.Sleep(5000);
+            driver.Close();
+        }
 
     }
 }

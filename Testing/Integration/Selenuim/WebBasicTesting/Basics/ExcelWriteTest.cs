@@ -30,7 +30,7 @@ namespace WebBasicTesting.Basics
             // act
             var user = dataAccess.CreateUser();
             var knownPassword = "Test@123";
-
+           
             // assert
             Assert.Equal(user.Password, knownPassword);
         }

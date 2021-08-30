@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dapper;
-using System.Text;
-using System.Threading.Tasks;
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
 
 namespace WebBasicTesting.Basics.TestDataAccess
 {
@@ -29,7 +23,7 @@ namespace WebBasicTesting.Basics.TestDataAccess
         {
             var file = "TestData.xlsx";
             IXLWorkbook workbook = new XLWorkbook(file);
-            IXLWorksheet worksheet = workbook.AddWorksheet("Dataset");
+            IXLWorksheet worksheet = workbook.Worksheet("Dataset");
 
             return new UserData
             {
