@@ -13,5 +13,3 @@
 3. Get the apprtment name, website, full Address, phone number.
 4. Save this information into a google sheet.
 5. Use google maps and search for "apartment complex in 76123", note that texas has 1772 Zip codes.
-
-e.g 
