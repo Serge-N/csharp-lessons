@@ -37,7 +37,6 @@ namespace WebBasicTesting.Basics.OnlineStore
 
             // assert
             Assert.Equal(expectedPage, currentPage);
-
             Thread.Sleep(5000);
             driver.Close();
         }
