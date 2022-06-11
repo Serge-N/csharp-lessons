@@ -1,6 +1,7 @@
 using AuthSample;
 using AuthSample.Auth.Models;
 using AuthSample.Mappings;
+using AuthSample.Settings;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,8 @@ var config = new MapperConfiguration(cfg =>
 var mapper = config.CreateMapper();
 
 builder.Services.AddSingleton(mapper);
+
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("jwt"));
 
 
 var app = builder.Build();
