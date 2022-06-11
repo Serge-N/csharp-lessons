@@ -2,6 +2,7 @@
 using AuthSample.Resources;
 using AuthSample.Settings;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -22,10 +23,11 @@ namespace AuthSample.Controllers
         private readonly JwtSettings _jwtSettings;
 
 
-        public AuthController(IMapper mapper, UserManager<User> userManager, IOptionsSnapshot<JwtSettings> jwtSettings)
+        public AuthController(IMapper mapper, UserManager<User> userManager, RoleManager<Role> roleManager, IOptionsSnapshot<JwtSettings> jwtSettings)
         {
             _mapper = mapper;
             _userManager = userManager;
+            _roleManager = roleManager;
             _jwtSettings = jwtSettings.Value;
         }
 
@@ -64,6 +66,7 @@ namespace AuthSample.Controllers
             return BadRequest("Email or password incorrect.");
         }
 
+        [Authorize]
         [HttpPost("Roles")]
         public async Task<IActionResult> CreateRole(string roleName)
         {
@@ -87,6 +90,7 @@ namespace AuthSample.Controllers
             return Problem(roleResult.Errors.First().Description, null, 500);
         }
 
+        [Authorize]
         [HttpPost("User/{userEmail}/Role")]
         public async Task<IActionResult> AddUserToRole(string userEmail, [FromBody] string roleName)
         {
