@@ -1,5 +1,6 @@
 ﻿using Crud.Models;
 using Grpc.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Crud.Services;
 
@@ -10,20 +11,21 @@ public class ProductsAppService : ProductsService.ProductsServiceBase
     public ProductsAppService(LearnContext context) => _context = context;
 
     #region GetAll
-    public override Task<Products> GetAll(Empty request, ServerCallContext context)
+    public override async Task<Products> GetAll(Empty request, ServerCallContext context)
     {
-        Products response = new Products();
-        var products = from prd in _context.Products
-                       select new Product()
-                       {
-                           ProductId = prd.ProductId,
-                           ProductName = prd.ProductName,
-                           CategoryName = prd.CategoryName,
-                           Manufacturer = prd.Manufacturer,
-                           Price = prd.Price
-                       };
-        response.Items.AddRange(products.ToArray());
-        return Task.FromResult(response);
+        var response = new Products();
+        var products = await _context.Products.Select(prd => new Product()
+        {
+            ProductId = prd.ProductId,
+            ProductName = prd.ProductName,
+            CategoryName = prd.CategoryName,
+            Manufacturer = prd.Manufacturer,
+            Price = prd.Price
+        }).ToListAsync();
+
+
+        response.Items.AddRange(products);
+        return response;
     }
 
     #endregion
@@ -45,19 +47,18 @@ public class ProductsAppService : ProductsService.ProductsServiceBase
     #endregion
 
     #region PostInsert
-    public override Task<Product> Post(Product request, ServerCallContext context)
+    public override async Task<Product> Post(Product request, ServerCallContext context)
     {
-        var prdAdded = new Models.Product()
+        var product = new Models.Product()
         {
-            ProductId = request.ProductId,
             ProductName = request.ProductName,
             CategoryName = request.CategoryName,
             Manufacturer = request.Manufacturer,
             Price = request.Price
         };
 
-        var res = _context.Products.Add(prdAdded);
-        _context.SaveChanges();
+        var res = _context.Products.Add(product);
+        await _context.SaveChangesAsync();
 
         var response = new Product()
         {
@@ -67,29 +68,30 @@ public class ProductsAppService : ProductsService.ProductsServiceBase
             Manufacturer = res.Entity.Manufacturer,
             Price = res.Entity.Price
         };
-        return Task.FromResult<Product>(response);
+
+        return response;
     }
     #endregion
 
     #region PUTUPDATE
-    public override Task<Product> Put(Product request, ServerCallContext context)
+    public override async Task<Product> Put(Product request, ServerCallContext context)
     {
         Models.Product prd = _context.Products.Find(request.ProductId);
+
         if (prd == null)
         {
-            return Task.FromResult<Product>(null);
+            return await Task.FromResult<Product>(null);
         }
 
-        prd.ProductId = request.ProductId;
         prd.ProductName = request.ProductName;
         prd.CategoryName = request.CategoryName;
         prd.Manufacturer = request.Manufacturer;
         prd.Price = request.Price;
 
         _context.Products.Update(prd);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
-        return Task.FromResult(new Product()
+        return await Task.FromResult(new Product()
         {
             ProductId = prd.ProductId,
             ProductName = prd.ProductName,
@@ -101,16 +103,17 @@ public class ProductsAppService : ProductsService.ProductsServiceBase
     #endregion
 
     #region DELETE
-    public override Task<Empty> Delete(ProductRowIdFilter request, ServerCallContext context)
+    public override async Task<Empty> Delete(ProductRowIdFilter request, ServerCallContext context)
     {
         Models.Product prd = _context.Products.Find(request.ProductId);
         if (prd == null)
         {
-            return Task.FromResult<Empty>(null);
+            return await Task.FromResult<Empty>(null);
         }
+
         _context.Products.Remove(prd);
-        _context.SaveChanges();
-        return Task.FromResult<Empty>(new Empty());
+        await _context.SaveChangesAsync();
+        return await Task.FromResult<Empty>(new Empty());
     }
     #endregion
 }
