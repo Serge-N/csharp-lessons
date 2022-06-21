@@ -1,14 +1,3 @@
-## Wiki structure
-- Intro
-- Why
-- How
-- When
-- Pros
-- Cons
-- Conclusion
-
-- Uses gists where possible.
-
 ## Learn Points
   - CRUD
   - Unary (no streaming)
@@ -29,3 +18,5 @@
   - Deployment to a Docker container
   - Known Limitations
   - Conclusion
+
+The output for each project is saved in an output folder.
